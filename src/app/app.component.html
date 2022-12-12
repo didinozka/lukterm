@@ -1,7 +1,12 @@
 <div class="header">
   <div class="header__input">
     <form (ngSubmit)="onSubmit()">
-      <input name="address" type="text" placeholder="Zadaj IP adresu" [(ngModel)]="ipAddress">
+      <input
+        name="address"
+        type="text"
+        placeholder="Zadaj IP adresu"
+        [(ngModel)]="ipAddress"
+      />
       <button type="submit">Pridat IP adresu</button>
     </form>
     <div class="clientName">{{ clientName }}</div>
@@ -10,7 +15,7 @@
 
   <div class="list">
     <div *ngFor="let addr of addresses; index as i">
-      {{ 'Komresor: ' + (i + 1) + ', IP adresa: ' + addr }}
+      {{ "Komresor: " + (i + 1) + ", IP adresa: " + addr }}
     </div>
   </div>
 </div>
@@ -18,21 +23,27 @@
 <div *ngIf="isConfig" class="config">
   <div>
     <label>Klient</label>
-    <input name="width" type="text" [(ngModel)]="clientName">
+    <input name="width" type="text" [(ngModel)]="clientName" />
   </div>
   <div>
     <label>sirka</label>
-    <input name="width" type="text" [(ngModel)]="width">
+    <input name="width" type="text" [(ngModel)]="width" />
   </div>
   <div>
     <label>vyska</label>
-    <input name="height" type="text" [(ngModel)]="height">
+    <input name="height" type="text" [(ngModel)]="height" />
   </div>
 </div>
 <div class="wrapper">
-  <div *ngFor="let addr of addresses; index as i" class="view"
-       [ngStyle]="{ width: width + 'px', height: height + 'px' }">
-    {{ 'Komresor: ' + (i + 1) + ', IP adresa: ' + addr }}
+  <div
+    *ngFor="let addr of addresses; index as i"
+    class="view"
+    [ngStyle]="{ width: width + 'px', height: height + 'px' }"
+  >
+    <div class="view__header">
+      {{ "Komresor: " + (i + 1) + ", IP adresa: " + addr }}
+      <a class="clicable" (click)="onRemove(i)">Zmazat</a>
+    </div>
     <iframe [src]="addr" width="100%" height="100%"></iframe>
   </div>
 </div>

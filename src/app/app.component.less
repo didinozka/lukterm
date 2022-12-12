@@ -29,7 +29,23 @@
 .view {
   flex: 1 0 33%;
 
+  &__header {
+    display: flex;
+    justify-content: space-between;
+
+    a {
+      color: red;
+    }
+  }
+
   iframe {
     border: 1px solid #3b3b3b;
+  }
+}
+
+.clickable {
+  &:hover {
+    cursor: pointer;
+    opacity: 0.5;
   }
 }
