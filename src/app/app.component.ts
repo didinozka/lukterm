@@ -1,10 +1,10 @@
-import { Component, Sanitizer, SecurityContext } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { Component } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
-import { PwdDialogComponent } from './components/pwd-dialog.component';
 import { ConfigDialogComponent, ConfigDialogData } from './components/config-dialog.component';
 import { ClientData } from './model/ClientData';
 import { AddIpAddressDialogComponent } from './components/add-ip-address.component';
+import { PwdDialogComponent } from './components/pwd-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,15 @@ export class AppComponent {
   isConfig = false;
   password = 'JebloMaVeslo.951';
   height: number = 400;
-  clientData?: ClientData;
+  clientData?: ClientData = {
+    subtitle: '',
+    name: '',
+    technician: {
+      name: '',
+      phone: '',
+      email: ''
+    }
+  };
 
   constructor(private sanitizer: DomSanitizer, private dialog: MatDialog) {
     this.height = window.innerHeight - 112;
@@ -54,20 +62,16 @@ export class AppComponent {
   }
 
   public openPwdDialog() {
-    this.openConfig();
-
-
-    // const dialog = this.dialog.open(PwdDialogComponent, {
-    //   data: {
-    //     pwd: ''
-    //   }
-    // });
-    // dialog.afterClosed().subscribe((value) => {
-    //   if (value === 'asd') {
-    //     // if (pwd === 'JebloMaVeslo.951') {
-    //     this.openConfig();
-    //   }
-    // })
+    const dialog = this.dialog.open(PwdDialogComponent, {
+      data: {
+        pwd: ''
+      }
+    });
+    dialog.afterClosed().subscribe((value) => {
+      if (value === this.password) {
+        this.openConfig();
+      }
+    })
   }
 
   private addAddress(ipAddress: string) {
@@ -94,7 +98,12 @@ export class AppComponent {
         height: this.height,
         clientData: {
           name: this.clientData?.name,
-          subtitle: this.clientData?.subtitle
+          subtitle: this.clientData?.subtitle,
+          technician: {
+            email: this.clientData?.technician?.email,
+            name: this.clientData?.technician?.name,
+            phone: this.clientData?.technician?.phone
+          }
         } as ClientData
       }
     });
@@ -105,7 +114,11 @@ export class AppComponent {
       this.height = height;
       this.clientData = {
         subtitle: clientData.subtitle,
-        technician: clientData.technician,
+        technician: {
+          phone: clientData.technician?.phone,
+          name: clientData.technician?.name,
+          email: clientData.technician?.email
+        },
         name: clientData.name
       }
     })

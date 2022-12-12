@@ -1,50 +1,28 @@
 <div class="app-body">
-  <div *ngIf="clientData" class="branding">
-    <div class="client">
-      <div class="client__name">{{ clientData?.name }}</div>
-      <div class="client__subtitle">{{ clientData?.subtitle }}</div>
-    </div>
-    <div class="technician">
-      <div class="client__subtitle">{{ clientData?.technician }}</div>
-    </div>
-  </div>
+  <app-header
+    [title]="clientData?.name"
+    [subtitle]="clientData?.subtitle"
+    [technician]="clientData?.technician"
+  ></app-header>
 
-  <div class="header">
-    <div class="header__input">
-      <form (ngSubmit)="onSubmit()">
-        <mat-form-field>
-          <mat-label>IP adresa</mat-label>
-          <input matInput placeholder="Zadaj IP adresu" [(ngModel)]="ipAddress" name="ipAddress">
-        </mat-form-field>
-        <button mat-raised-button color="primary" type="submit" [disabled]="!ipAddress?.length">Pridat IP adresu</button>
-      </form>
-      <button class="config-button" mat-mini-fab color="primary" (click)="onConfig()">
-        <mat-icon>settings</mat-icon>
-      </button>
-    </div>
-  </div>
+  <app-action-header
+    (addAddress)="onAddAddress()"
+    (openConfig)="onConfig()"
+  ></app-action-header>
 
-  <div *ngIf="isConfig" class="config">
-<!--    <div>-->
-<!--      <label>Klient</label>-->
-<!--      <input name="width" type="text" [(ngModel)]="clientData?.name"/>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--      <label>vyska</label>-->
-<!--      <input name="height" type="text" [(ngModel)]="height"/>-->
-<!--    </div>-->
-  </div>
 
   <div class="app-content">
-    <mat-label>Kompresory:</mat-label>
-    <mat-chip-list class="short-list">
-      <mat-chip *ngFor="let addr of addresses; index as i">
-        {{ "Kompresor: " + (i + 1) + ", IP adresa: " + addr.ip }}
-      </mat-chip>
-      <div class="short-list__empty" *ngIf="!addresses.length">
-        Ziadne kompresory pridane. Pridaj IP adresy.
-      </div>
-    </mat-chip-list>
+    <div class="short-list">
+      <mat-label>Kompresory:</mat-label>
+      <mat-chip-list>
+        <mat-chip *ngFor="let addr of addresses; index as i">
+          {{ "Kompresor: " + (i + 1) + ", IP adresa: " + addr.ip }}
+        </mat-chip>
+        <div class="short-list__empty" *ngIf="!addresses.length">
+          Ziadne kompresory pridane. Pridaj IP adresy.
+        </div>
+      </mat-chip-list>
+    </div>
 
     <div class="frames">
       <div
@@ -53,12 +31,19 @@
         [ngStyle]="{ height: height + 'px' }"
       >
         <div class="frames__view__header">
-          {{ "Komresor: " + (i + 1) + ", IP adresa: " + addr?.ip }}
-          <a class="clicable" (click)="onRemove(i)">Zmazat</a>
+          <h4>{{ "Komresor: " + (i + 1) + ", IP adresa: " + addr?.ip }}</h4>
+          <button class="remove-action" mat-flat-button aria-label="Remove frame" (click)="onRemove(i)">
+            <mat-icon>close</mat-icon>
+          </button>
         </div>
         <iframe [src]="addr?.safeUrl" width="100%" height="100%"></iframe>
       </div>
     </div>
   </div>
 
+  <div class="footer">
+    IDEAL - Trade Service spol. s r.o.
+  </div>
 </div>
+
+

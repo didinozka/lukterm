@@ -1,4 +1,4 @@
-import { Component, Inject, NgModule, OnInit } from '@angular/core';
+import { Component, Inject, NgModule } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
@@ -17,7 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
       </div>
       <div mat-dialog-actions>
         <button mat-button (click)="onNoClick()">Zrusit</button>
-        <button mat-button [mat-dialog-close]="data.ipAddress" cdkFocusInitial>Uloz</button>
+        <button mat-button [mat-dialog-close]="data.ipAddress" cdkFocusInitial>Pridat</button>
       </div>
     </div>
   `,

@@ -1,9 +1,10 @@
-import { Component, Inject, NgModule, OnInit } from '@angular/core';
+import { Component, Inject, NgModule } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { ClientData } from '../model/ClientData';
+import { MatListModule } from '@angular/material/list';
 
 export interface ConfigDialogData {
   height: number;
@@ -30,7 +31,15 @@ export interface ConfigDialogData {
               </mat-form-field>
               <mat-form-field appearance="fill">
                   <mat-label>Meno technika</mat-label>
-                  <input matInput type="text" [(ngModel)]="data.clientData.technician">
+                  <input matInput type="text" [(ngModel)]="data.clientData.technician.name">
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                  <mat-label>Tel c. technika</mat-label>
+                  <input matInput type="text" [(ngModel)]="data.clientData.technician.phone">
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                  <mat-label>Email technika</mat-label>
+                  <input matInput type="text" [(ngModel)]="data.clientData.technician.email">
               </mat-form-field>
           </div>
           <div mat-dialog-actions>
@@ -63,7 +72,8 @@ export class ConfigDialogComponent {
     MatInputModule,
     MatButtonModule,
     MatDialogModule,
-    FormsModule
+    FormsModule,
+    MatListModule
   ],
   exports: [ConfigDialogComponent]
 })

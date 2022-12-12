@@ -1,7 +1,10 @@
+@import (reference) "../styles";
+
 .app-body {
   height: 100vh;
   width: 100%;
   overflow-y: auto;
+  margin-bottom: 32px;
 }
 
 .header {
@@ -33,7 +36,7 @@
 }
 
 .short-list {
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 
   &__empty {
     color: #939393;
@@ -51,6 +54,12 @@
     &__header {
       display: flex;
       justify-content: space-between;
+      align-items: center;
+
+      h4 {
+        margin: 0;
+        font-weight: bold;
+      }
 
       a {
         color: red;
@@ -79,4 +88,21 @@
   font-size: @size;
   height: @size;
   width: @size;
+}
+
+.remove-action {
+  color: red;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 32px;
+  color: #ffffff;
+  background-color: @c-primary;
 }
