@@ -1,0 +1,30 @@
+{
+  "appId": "com.lukasturza.lukterm",
+  "productName": "lukterm",
+  "directories": {
+    "output": "release/",
+    "buildResources": "buildResources"
+  },
+  "buildVersion": "1.0.0",
+  "files": [
+    ".env",
+    "main.js",
+    "dist/lukas-term",
+    "electron",
+    "node_modules",
+    "buildResources"
+  ],
+  "win": {
+    "icon": "icons/icon.png",
+    "target": [
+      "zip"
+    ]
+  },
+  "linux": {
+    "icon": "icons/round-icon.png",
+    "target": [
+      "AppImage",
+      "deb"
+    ]
+  }
+}
