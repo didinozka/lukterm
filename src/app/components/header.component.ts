@@ -10,9 +10,14 @@ const isEmpty = (x: any) => !!x;
   selector: 'app-header',
   template: `
       <div class="header">
-          <div class="header__branding">
-              <h1 class="title">{{ title || '-' }}</h1>
-              <h4 class="subtitle">{{ subtitle || '-' }}</h4>
+          <div class="header__lead">
+              <div class="header__logo">
+                  <img [src]="'assets/images/logo.svg'" alt="ITS firemne logo"/>
+              </div>
+              <div class="header__branding">
+                  <h1 class="title">{{ title || '-' }}</h1>
+                  <h4 class="subtitle">{{ subtitle || '-' }}</h4>
+              </div>
           </div>
           <div *ngIf="technician" class="header__info">
               <div class="title">Technik</div>
@@ -31,7 +36,22 @@ const isEmpty = (x: any) => !!x;
       padding: 0 32px;
       box-shadow: 1px 4px 17px -4px rgba(0, 0, 0, 0.15);
     }`,
-    `.header__branding {}`,
+    `.header__logo img {
+      height: 30px;
+    }`,
+    `.header__logo {
+      display: flex;
+      align-items: center;
+    }`,
+    `.header__branding {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }`,
+    `.header__lead {
+      display: flex;
+      gap: 16px;
+    }`,
     `.header__info {
       color: #3b3b3b;
       font-size: 14px;
