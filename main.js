@@ -26,7 +26,6 @@ function createWindow() {
   } else {
     win.loadURL(getBundleUrl());
   }
-  win.webContents.openDevTools();
 
   win.on('closed', () => {
     win = null
