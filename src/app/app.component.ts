@@ -87,12 +87,12 @@ export class AppComponent {
   private openIpAddressDialog() {
     const dialog = this.dialog.open(AddIpAddressDialogComponent, {data: {ipAddress: ''}});
     dialog.afterClosed().subscribe((ipAddress) => {
+      if (!ipAddress) return;
       this.addAddress(ipAddress);
     })
   }
 
   private openConfig() {
-    // this.isConfig = true;
     const dialog = this.dialog.open(ConfigDialogComponent, {
       data: {
         height: this.height,

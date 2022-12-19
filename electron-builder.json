@@ -9,7 +9,7 @@
   "files": [
     ".env",
     "main.js",
-    "dist/lukas-term",
+    "build",
     "electron",
     "node_modules",
     "buildResources"
@@ -21,7 +21,7 @@
     ]
   },
   "linux": {
-    "icon": "icons/round-icon.png",
+    "icon": "icons/icon.png",
     "target": [
       "AppImage",
       "deb"

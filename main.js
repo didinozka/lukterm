@@ -4,12 +4,6 @@ const url = require("url");
 
 let win
 
-const original = BrowserWindow.prototype.loadURL;
-BrowserWindow.prototype.loadURL = function (url, options) {
-  this.loadedURL = url;
-  return original.bind(this)(url, options);
-}
-
 function createWindow() {
   const isDev = process?.env?.ENV === 'dev';
   // Create the browser window.
@@ -20,18 +14,19 @@ function createWindow() {
     minHeight: 500,
     webPreferences: {
       nodeIntegration: true,
-      webSecurity: !process.env.DISABLE_CORS,
-      preload: path.join(__dirname, './electron/preload.js')
+      webSecurity: false
+      // webSecurity: !process.env.DISABLE_CORS,
     },
-    icon: path.join(__dirname, 'build/icons/icon.png')
+    // icon: path.join(__dirname, 'build/icons/icon.png')
   })
 
+  console.log('isDev', process?.env?.ENV)
   if (isDev) {
     win.loadURL('http://localhost:4200/')
-    win.webContents.openDevTools();
   } else {
     win.loadURL(getBundleUrl());
   }
+  win.webContents.openDevTools();
 
   win.on('closed', () => {
     win = null
@@ -54,7 +49,7 @@ function getBundleUrl() {
   return url.format({
     pathname: path.join(
       __dirname,
-      '../build/index.html'),
+      './build/index.html'),
     protocol: 'file:',
     slashes: true
   })
