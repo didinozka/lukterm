@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, NgModule, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { TechnicianData } from '../model/ClientData';
+import { ClientData, TechnicianData } from '../model/ClientData';
 import { CommonModule } from '@angular/common';
 
 const isEmpty = (x: any) => !!x;
@@ -15,15 +15,15 @@ const isEmpty = (x: any) => !!x;
                   <img [src]="'assets/images/logo.svg'" alt="ITS firemne logo"/>
               </div>
               <div class="header__branding">
-                  <h1 class="title">{{ title || '-' }}</h1>
-                  <h4 class="subtitle">{{ subtitle || '-' }}</h4>
+                  <h1 class="title">{{ clientData?.name || '-' }}</h1>
+                  <h4 class="subtitle">{{ clientData?.subtitle || '-' }}</h4>
               </div>
           </div>
-          <div *ngIf="technician" class="header__info">
+          <div *ngIf="clientData" class="header__info">
               <div class="title">Technik</div>
-              <div>{{technician?.name || '-'}}</div>
-              <div>{{technician?.email}}</div>
-              <div>{{technician?.phone}}</div>
+              <div>{{clientData.technicianName || '-'}}</div>
+              <div>{{clientData.technicianPhone}}</div>
+              <div>{{clientData.technicianEmail}}</div>
           </div>
       </div>
   `,
@@ -76,9 +76,7 @@ const isEmpty = (x: any) => !!x;
   ]
 })
 export class HeaderComponent {
-  @Input() public title?: string;
-  @Input() public subtitle?: string;
-  @Input() public technician?: TechnicianData;
+  @Input() public clientData?: ClientData;
 
   @Output() public addAddress = new EventEmitter();
   @Output() public openConfig = new EventEmitter();

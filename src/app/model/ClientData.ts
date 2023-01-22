@@ -5,7 +5,16 @@ export interface TechnicianData {
 }
 
 export interface ClientData {
+  id?: string;
   name: string;
   subtitle: string;
-  technician: TechnicianData;
+  technicianName: string;
+  technicianPhone: string;
+  technicianEmail: string;
+  ipAddresses?: string[];
+}
+
+export interface ClientDataResponse {
+  id: number;
+  created_at?: string
 }

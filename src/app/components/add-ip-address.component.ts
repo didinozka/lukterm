@@ -17,7 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
       </div>
       <div mat-dialog-actions>
         <button mat-button (click)="onNoClick()">Zrusit</button>
-        <button mat-button [mat-dialog-close]="data.ipAddress" cdkFocusInitial>Pridat</button>
+        <button mat-button color="primary" [mat-dialog-close]="data.ipAddress" cdkFocusInitial>Pridat</button>
       </div>
     </div>
   `,
@@ -28,6 +28,7 @@ export class AddIpAddressDialogComponent {
     public dialogRef: MatDialogRef<AddIpAddressDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { ipAddress: string },
   ) {
+    const ipRegex = '(\\b25[0-5]|\\b2[0-4][0-9]|\\b[01]?[0-9][0-9]?)(\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}';
   }
 
   onNoClick(): void {

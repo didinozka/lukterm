@@ -1,0 +1,37 @@
+<div class="register">
+  <div class="register__form" [formGroup]="form">
+    <h2>Prihlasenie</h2>
+    <mat-form-field class="register__form__input">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput [formControlName]="'email'" [errorStateMatcher]="errorMatcher"
+             placeholder="Ex. pat@example.com">
+      <mat-error *ngIf="form.get('email')?.hasError('email') && !form.get('email')?.hasError('required')">
+        Neplatny email
+      </mat-error>
+      <mat-error *ngIf="form.get('email')?.hasError('required')">
+        Heslo je <strong>povinne</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="register__form__input">
+      <mat-label>Password</mat-label>
+      <input type="password"
+             matInput
+             [formControlName]="'password'"
+             [errorStateMatcher]="errorMatcher"
+             placeholder="Zadaj heslo">
+      <mat-error *ngIf="form.get('password')?.hasError('password')">
+        Heslo je <strong>povinne</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <div class="register__actions">
+      <button mat-raised-button color="primary" (click)="onSubmit()">
+        Vytvorit ucet
+      </button>
+
+      <button mat-raised-button (click)="onBack()">
+        Spat
+      </button>
+    </div>
+  </div>
+</div>

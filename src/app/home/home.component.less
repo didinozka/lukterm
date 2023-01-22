@@ -1,0 +1,108 @@
+@import (reference) "../../styles";
+
+.app-body {
+  height: 100vh;
+  width: 100%;
+  overflow-y: auto;
+  margin-bottom: 32px;
+}
+
+.header {
+  margin-bottom: 32px;
+
+  &__input {
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+    align-items: center;
+    background-color: #e6e6e6;
+    padding: 0 16px;
+    border-radius: 10px;
+
+    form {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+  }
+}
+
+.clientName {
+  font-weight: bold;
+}
+
+.list {
+  margin-bottom: 32px;
+}
+
+.short-list {
+  margin-bottom: 24px;
+
+  &__empty {
+    color: #939393;
+  }
+}
+
+.frames {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+
+  &__view {
+    flex: 1 0 33%;
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      h4 {
+        margin: 0;
+        font-weight: bold;
+      }
+
+      a {
+        color: red;
+      }
+    }
+
+    iframe {
+      border: 1px solid #3b3b3b;
+    }
+  }
+}
+
+.app-content {
+  padding: 0 16px;
+}
+
+.clickable {
+  &:hover {
+    cursor: pointer;
+    opacity: 0.5;
+  }
+}
+
+.material-icons {
+  @size: 20px;
+  font-size: @size;
+  height: @size;
+  width: @size;
+}
+
+.remove-action {
+  color: red;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 32px;
+  color: #ffffff;
+  background-color: @c-primary;
+}

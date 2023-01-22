@@ -1,0 +1,75 @@
+<div class="add-client" [formGroup]="form">
+  <h1 mat-dialog-title>Pridat klienta</h1>
+  <div class="add-client__form" mat-dialog-content>
+    <mat-form-field class="add-client__form__input">
+      <mat-label>Meno</mat-label>
+      <input type="email" matInput [formControlName]="'name'" [errorStateMatcher]="errorMatcher"
+             placeholder="Nazov klienta">
+      <mat-error *ngIf="form.get('name')?.hasError('required')">
+        Pole je <strong>povinne</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="add-client__form__input">
+      <mat-label>Popis</mat-label>
+      <input type="text"
+             matInput
+             [formControlName]="'subtitle'"
+             [errorStateMatcher]="errorMatcher"
+             placeholder="Ex. pat@example.com">
+      <mat-error *ngIf="form.get('subtitle')?.hasError('password')">
+        Pole je <strong>povinne</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="add-client__form__input">
+      <mat-label>Meno technika</mat-label>
+      <input type="text"
+             matInput
+             [formControlName]="'technicianName'"
+             [errorStateMatcher]="errorMatcher"
+             placeholder="Zadaj meno">
+      <mat-error *ngIf="form.get('technicianName')?.hasError('password')">
+        Pole je <strong>povinne</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="add-client__form__input">
+      <mat-label>Tel cislo na technika</mat-label>
+      <input type="phone"
+             matInput
+             [formControlName]="'technicianPhone'"
+             [errorStateMatcher]="errorMatcher"
+             placeholder="Zadaj telefonne cislo">
+      <mat-error *ngIf="form.get('technicianPhone')?.hasError('password')">
+        Pole je <strong>povinne</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="add-client__form__input">
+      <mat-label>Email technika</mat-label>
+      <input type="email"
+             matInput
+             [formControlName]="'technicianEmail'"
+             [errorStateMatcher]="errorMatcher"
+             placeholder="Zadaj email">
+      <mat-error *ngIf="form.get('technicianEmail')?.hasError('password')">
+        Pole je <strong>povinne</strong>
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-raised-button
+            color="primary"
+            [mat-dialog-close]="data"
+    >
+      Pridat
+    </button>
+
+    <button mat-raised-button (click)="onCancel()">
+      Cancel
+    </button>
+  </div>
+
+</div>

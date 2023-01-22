@@ -1,0 +1,71 @@
+<div *ngIf="user$ | async as user" class="administration">
+  <div class="administration__header">
+    <button mat-button (click)="onBack()">
+      <mat-icon>arrow_back</mat-icon>
+      Spat
+    </button>
+
+    <div *ngIf="user" class="administration__header__actions">
+      <button mat-raised-button color="primary" (click)="onAddClient()">
+        <mat-icon>add</mat-icon>
+        Pridat klienta
+      </button>
+    </div>
+  </div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Meno </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="subtitle">
+      <th mat-header-cell *matHeaderCellDef>Popis</th>
+      <td mat-cell *matCellDef="let element"> {{element.subtitle}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="technicianName">
+      <th mat-header-cell *matHeaderCellDef>Meno technika</th>
+      <td mat-cell *matCellDef="let element"> {{element.technicianName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="technicianPhone">
+      <th mat-header-cell *matHeaderCellDef>Tel c technika</th>
+      <td mat-cell *matCellDef="let element"> {{element.technicianPhone}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="technicianEmail">
+      <th mat-header-cell *matHeaderCellDef>Email technika</th>
+      <td mat-cell *matCellDef="let element"> {{element.technicianEmail}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="indicator">
+      <th mat-header-cell *matHeaderCellDef>Indikator</th>
+      <td mat-cell *matCellDef="let element"> {{element.technicianEmail}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Akcie</th>
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="selectedClient?.id === element.id; else actionTmpl">
+          <span class="active-row">
+            Aktivny klient
+          </span>
+        </ng-container>
+        <ng-template #actionTmpl>
+         <div class="table__actions">
+           <button mat-raised-button (click)="onSelectClient(element, $event)">
+             Vybrat klienta
+           </button>
+           <div class="table__actions__action" mat-raised-button (click)="onDeleteItem(element, $event)">
+             <mat-icon>delete</mat-icon>
+           </div>
+         </div>
+        </ng-template>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="clickable" (click)="onRowClick(row)"></tr>
+  </table>
+</div>

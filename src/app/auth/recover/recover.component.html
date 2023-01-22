@@ -1,0 +1,23 @@
+<div class="recover">
+  <div class="recover__form" [formGroup]="form">
+    <mat-form-field class="recover__form__input">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput [formControlName]="'email'" [errorStateMatcher]="errorMatcher"
+             placeholder="Ex. pat@example.com">
+      <mat-error *ngIf="form.get('email')?.hasError('email') && !form.get('email')?.hasError('required')">
+        Neplatny email
+      </mat-error>
+      <mat-error *ngIf="form.get('email')?.hasError('required')">
+        Pole je <strong>povinne</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="onSubmit()">
+      Poslat email
+    </button>
+
+    <button mat-raised-button (click)="onBack()">
+      Spat
+    </button>
+  </div>
+</div>
