@@ -1,0 +1,12 @@
+<div class="confirm-reset-dialog">
+    <div mat-dialog-title>
+        Resetovanie aplikacie
+    </div>
+    <div mat-dialog-content>
+       Vsetky data budu zmazane a heslo zresetovane. Pokracovat?
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">Zrusit</button>
+        <button mat-button color="warn" [mat-dialog-close]="true" cdkFocusInitial>Pokracovat</button>
+    </div>
+</div>

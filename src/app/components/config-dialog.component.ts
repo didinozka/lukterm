@@ -9,6 +9,7 @@ import { MatListModule } from '@angular/material/list';
 export interface ConfigDialogData {
   height: number;
   clientData: ClientData;
+  password?: string;
 }
 
 @Component({
@@ -21,30 +22,37 @@ export interface ConfigDialogData {
                   <mat-label>Vyska riadka panelu (px)</mat-label>
                   <input matInput type="number" [(ngModel)]="data.height">
               </mat-form-field>
-              <mat-form-field appearance="fill">
+              <mat-form-field appearance="outline">
                   <mat-label>Meno klienta</mat-label>
                   <input matInput type="text" [(ngModel)]="data.clientData.name">
               </mat-form-field>
-              <mat-form-field appearance="fill">
+              <mat-form-field appearance="outline">
                   <mat-label>Popis klienta</mat-label>
                   <input matInput type="text" [(ngModel)]="data.clientData.subtitle">
               </mat-form-field>
-              <mat-form-field appearance="fill">
+              <mat-form-field appearance="outline">
                   <mat-label>Meno technika</mat-label>
                   <input matInput type="text" [(ngModel)]="data.clientData.technician.name">
               </mat-form-field>
-              <mat-form-field appearance="fill">
+              <mat-form-field appearance="outline">
                   <mat-label>Tel c. technika</mat-label>
                   <input matInput type="text" [(ngModel)]="data.clientData.technician.phone">
               </mat-form-field>
-              <mat-form-field appearance="fill">
+              <mat-form-field appearance="outline">
                   <mat-label>Email technika</mat-label>
                   <input matInput type="text" [(ngModel)]="data.clientData.technician.email">
               </mat-form-field>
+
+              <div class="config-dialog__pwd">
+              <mat-form-field appearance="outline">
+                  <mat-label>Nove heslo</mat-label>
+                  <input matInput type="text" [(ngModel)]="data.password" type="password">
+              </mat-form-field>
+              </div>
           </div>
           <div mat-dialog-actions>
               <button mat-button (click)="onNoClick()">Zrusit</button>
-              <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Uloz</button>
+              <button mat-button [mat-dialog-close]="data" color="primary" cdkFocusInitial>Uloz</button>
           </div>
       </div>
   `,

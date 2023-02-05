@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HeaderModule } from './components/header.component';
 import { ActionHeaderModule } from './components/action-header.component';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,9 @@ import { ActionHeaderModule } from './components/action-header.component';
     HeaderModule,
     ActionHeaderModule
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
