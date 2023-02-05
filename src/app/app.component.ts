@@ -32,7 +32,7 @@ export class AppComponent {
   public ipAddress: string = '';
   public addresses: { ip: string; safeUrl: SafeResourceUrl }[] = [];
   isConfig = false;
-  password: string;
+  password?: string;
   height: number = 400;
   clientData?: ClientData;
 
@@ -45,7 +45,7 @@ export class AppComponent {
       [KeyCode.alt, KeyCode.shift, 'KeyR'],
       () => {
         console.log('reset app');
-        const dialog = this.dialog.open(ConfirmResetComponent); 
+        const dialog = this.dialog.open(ConfirmResetComponent);
         dialog.afterClosed().subscribe((value) => {
           if (value) {
             this.resetData();
@@ -56,18 +56,17 @@ export class AppComponent {
 
     this.height = window.innerHeight - 112;
 
+    this.initClientData();
+    this.initPwd();
+    this.restoreAddresses();
+  }
+
+  private initClientData() {
     const strData = localStorage.getItem('data');
     if (strData) {
       this.clientData = JSON.parse(strData);
     } else {
       this.clientData = DEFAULT_CLIENT_DATA;
-    }
-
-    const strPwd = localStorage.getItem('pwd');
-    if (strPwd) {
-      this.password = atob(strPwd);
-    } else {
-      this.password = DEFAULT_PWD;
     }
   }
 
@@ -129,6 +128,7 @@ export class AppComponent {
     dialog.afterClosed().subscribe((ipAddress) => {
       if (!ipAddress) return;
       this.addAddress(ipAddress);
+      this.persistAddresses();
     });
   }
 
@@ -169,11 +169,37 @@ export class AppComponent {
     });
   }
 
+  private initPwd() {
+    const strPwd = localStorage.getItem('pwd');
+    if (strPwd) {
+      this.password = atob(strPwd);
+    } else {
+      this.password = DEFAULT_PWD;
+    }
+  }
+
+  private restoreAddresses() {
+    const addrStr = localStorage.getItem('addresses');
+    if (!addrStr) {
+      return;
+    }
+    const addrArr = JSON.parse(addrStr) as string[];
+    addrArr.forEach((ip) => {
+      this.addAddress(ip);
+    });
+  }
+
   private persistClientData() {
     localStorage.setItem('data', JSON.stringify(this.clientData));
   }
 
+  private persistAddresses() {
+    const ipAddr = this.addresses.map(({ ip }) => ip);
+    localStorage.setItem('addresses', JSON.stringify(ipAddr));
+  }
+
   private persistPwd() {
+    if (!this.password) return;
     localStorage.setItem('pwd', btoa(this.password));
   }
 
@@ -181,6 +207,6 @@ export class AppComponent {
     this.clientData = DEFAULT_CLIENT_DATA;
     this.password = DEFAULT_PWD;
     this.persistClientData();
-      this.persistPwd();
+    this.persistPwd();
   }
 }

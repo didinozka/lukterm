@@ -9,8 +9,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
-import { HeaderModule } from './components/header.component';
-import { ActionHeaderModule } from './components/action-header.component';
+import { HeaderModule } from './components/header/header.component';
+import { ActionHeaderModule } from './components/action-header/action-header.component';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 @NgModule({

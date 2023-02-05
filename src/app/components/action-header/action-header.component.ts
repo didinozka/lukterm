@@ -18,18 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
           </div>
       </div>
   `,
-  styles: [
-    `.header {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      padding: 16px 32px;
-    }`,
-    `.header__actions {
-      display: flex;
-      gap: 16px;
-    }`,
-  ]
+  styleUrls: ['./action-header.component.less']
 })
 export class ActionHeaderComponent {
   @Output() public addAddress = new EventEmitter();
