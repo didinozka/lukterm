@@ -9,38 +9,8 @@ import { AsyncPipe, CommonModule, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-action-header',
-  template: `
-      <div class="header">
-          <div *ngIf="user$ | async as user" class="header__actions">
-              <button *ngIf="user?.data?.user" mat-raised-button color="primary" (click)="addAddress.emit()">
-                  <mat-icon>add</mat-icon>
-                  Pridat IP adresu
-              </button>
-              <button mat-raised-button (click)="onAdmin()">
-                  <mat-icon>settings</mat-icon>
-              </button>
-              <button *ngIf="user?.data?.user" mat-raised-button (click)="logout.emit()">
-                  Odhlasit
-              </button>
-              <!--              <button mat-raised-button (click)="openConfig.emit()">-->
-              <!--                  <mat-icon>settings</mat-icon>-->
-              <!--                  Nastavenia-->
-              <!--              </button>-->
-          </div>
-      </div>
-  `,
-  styles: [
-    `.header {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      padding: 16px 32px;
-    }`,
-    `.header__actions {
-      display: flex;
-      gap: 16px;
-    }`,
-  ]
+  templateUrl: './action-header.component.html',
+  styleUrls: ['action-header.component.less']
 })
 export class ActionHeaderComponent {
   @Output() public addAddress = new EventEmitter();

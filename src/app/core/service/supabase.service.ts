@@ -1,7 +1,6 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Injectable } from '@angular/core';
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import { EMPTY, from } from 'rxjs';
+import { createClient, SupabaseClient, UserResponse } from '@supabase/supabase-js';
+import { from } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ClientData } from '../../model/ClientData';
 
@@ -9,6 +8,7 @@ import { ClientData } from '../../model/ClientData';
 export class SupabaseService {
   private supabase: SupabaseClient;
   private clientsTable: any;
+  private user?: UserResponse;
 
   constructor() {
     this.supabase = createClient(environment.baseUrl, environment.authKey);

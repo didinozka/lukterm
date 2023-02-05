@@ -27,53 +27,7 @@ const isEmpty = (x: any) => !!x;
           </div>
       </div>
   `,
-  styles: [
-    `.header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 86px;
-      padding: 0 32px;
-      box-shadow: 1px 4px 17px -4px rgba(0, 0, 0, 0.15);
-    }`,
-    `.header__logo img {
-      height: 30px;
-    }`,
-    `.header__logo {
-      display: flex;
-      align-items: center;
-    }`,
-    `.header__branding {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }`,
-    `.header__lead {
-      display: flex;
-      gap: 16px;
-    }`,
-    `.header__info {
-      color: #3b3b3b;
-      font-size: 14px;
-      text-align: end;
-    }`,
-    `.header__info .title {
-      font-weight: bold;
-    }`,
-    `.header__actions {
-      display: flex;
-      gap: 16px;
-    }`,
-    `.title {
-      line-height: 100%;
-      margin-bottom: 0;
-    }`,
-    `.subtitle {
-      line-height: 100%;
-      margin-bottom: 0;
-
-    }`
-  ]
+  styleUrls: ['./header.component.less']
 })
 export class HeaderComponent {
   @Input() public clientData?: ClientData;

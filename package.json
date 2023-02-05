@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "main": "main.js",
   "author": {
-    "email": "drabik.d@gmail.com"
+    "email": "drabik.d@gmail.com",
+    "name": "Dusan Drabik"
   },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start:electon": "ENV=dev electron .",
+    "start:electron": "ENV=dev electron .",
     "build": "ng build",
     "release": "DISABLE_CORS=true electron-builder --config electron-builder.json --publish never",
     "release:all-platforms": "npm run release -- -w",
