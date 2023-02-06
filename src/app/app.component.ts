@@ -86,6 +86,7 @@ export class AppComponent {
 
   public onRemove(index: number) {
     this.addresses = this.addresses.filter((_, i) => i !== index);
+    this.persistAddresses();
   }
 
   public onConfig() {
