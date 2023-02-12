@@ -12,6 +12,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { HeaderModule } from './components/header/header.component';
 import { ActionHeaderModule } from './components/action-header/action-header.component';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+import { HttpClientModule } from '@angular/common/http';
+
+registerLocaleData(en);
 
 @NgModule({
   declarations: [
@@ -27,10 +32,11 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
     MatIconModule,
     MatDialogModule,
     HeaderModule,
-    ActionHeaderModule
+    ActionHeaderModule,
+    HttpClientModule,
   ],
   providers: [
-    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
   ],
   bootstrap: [AppComponent]
 })

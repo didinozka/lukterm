@@ -17,36 +17,36 @@ export interface ConfigDialogData {
   template: `
       <div class="config-dialog">
           <h1 mat-dialog-title>Nastavenia</h1>
-          <div mat-dialog-content>
-              <mat-form-field>
+          <div mat-dialog-content class="config-dialog__form">
+              <mat-form-field appearance="fill">
                   <mat-label>Vyska riadka panelu (px)</mat-label>
                   <input matInput type="number" [(ngModel)]="data.height">
               </mat-form-field>
-              <mat-form-field appearance="outline">
+              <mat-form-field appearance="fill">
                   <mat-label>Meno klienta</mat-label>
                   <input matInput type="text" [(ngModel)]="data.clientData.name">
               </mat-form-field>
-              <mat-form-field appearance="outline">
+              <mat-form-field appearance="fill">
                   <mat-label>Popis klienta</mat-label>
                   <input matInput type="text" [(ngModel)]="data.clientData.subtitle">
               </mat-form-field>
-              <mat-form-field appearance="outline">
+              <mat-form-field appearance="fill">
                   <mat-label>Meno technika</mat-label>
                   <input matInput type="text" [(ngModel)]="data.clientData.technician.name">
               </mat-form-field>
-              <mat-form-field appearance="outline">
+              <mat-form-field appearance="fill">
                   <mat-label>Tel c. technika</mat-label>
                   <input matInput type="text" [(ngModel)]="data.clientData.technician.phone">
               </mat-form-field>
-              <mat-form-field appearance="outline">
+              <mat-form-field appearance="fill">
                   <mat-label>Email technika</mat-label>
                   <input matInput type="text" [(ngModel)]="data.clientData.technician.email">
               </mat-form-field>
 
               <div class="config-dialog__pwd">
-              <mat-form-field appearance="outline">
+              <mat-form-field appearance="fill">
                   <mat-label>Nove heslo</mat-label>
-                  <input matInput type="text" [(ngModel)]="data.password" type="password">
+                  <input matInput [(ngModel)]="data.password" type="password">
               </mat-form-field>
               </div>
           </div>
@@ -59,6 +59,10 @@ export interface ConfigDialogData {
   styles: [
     `.mat-form-field {
       display: block;
+    }`,
+    `.config-dialog__form {
+      display: flex;
+      flex-direction: column;
     }`
   ]
 })

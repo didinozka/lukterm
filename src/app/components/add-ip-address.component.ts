@@ -10,7 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
     <div class="add-ip-dialog">
       <h1 mat-dialog-title>Pridat IP adresu</h1>
       <div mat-dialog-content>
-        <mat-form-field>
+        <mat-form-field appearance="fill">
           <mat-label>IP adresa</mat-label>
           <input matInput type="text" [(ngModel)]="data.ipAddress">
         </mat-form-field>

@@ -1,9 +1,5 @@
-import { Component, Inject, NgModule, OnInit } from '@angular/core';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogModule,
-  MatDialogRef,
-} from '@angular/material/dialog';
+import { Component, Inject, NgModule } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef, } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,8 +8,9 @@ import { MatButtonModule } from '@angular/material/button';
   selector: 'app-pwd-dialog',
   template: `
     <div class="pwd-dialog">
+      <h1 mat-dialog-title>Prihlasenie</h1>
       <div mat-dialog-content>
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Heslo</mat-label>
           <input matInput type="password" [(ngModel)]="data.pwd" />
         </mat-form-field>

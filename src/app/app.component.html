@@ -8,20 +8,20 @@
   <app-action-header
     (addAddress)="onAddAddress()"
     (openConfig)="onConfig()"
+    (reload)="onReload()"
   ></app-action-header>
-
 
   <div class="app-content">
     <div class="short-list">
       <mat-label>Kompresory:</mat-label>
-      <mat-chip-list>
-        <mat-chip *ngFor="let addr of addresses; index as i">
+      <mat-chip-listbox>
+        <mat-chip-option *ngFor="let addr of addresses; index as i" selectable="false">
           {{ "Kompresor: " + (i + 1) + ", IP adresa: " + addr.ip }}
-        </mat-chip>
+        </mat-chip-option>
         <div class="short-list__empty" *ngIf="!addresses.length">
           Ziadne kompresory pridane. Pridaj IP adresy.
         </div>
-      </mat-chip-list>
+      </mat-chip-listbox>
     </div>
 
     <div class="frames">
@@ -32,8 +32,15 @@
       >
         <div class="frames__view__header">
           <h4>{{ "Komresor: " + (i + 1) + ", IP adresa: " + addr?.ip }}</h4>
-          <button class="remove-action" mat-flat-button aria-label="Remove frame" (click)="onRemove(i)">
+          <button
+            *ngIf="isAuthorized$ | async"
+            class="remove-action"
+            mat-flat-button
+            aria-label="Remove frame"
+            (click)="onRemove(i)"
+          >
             <mat-icon>close</mat-icon>
+            Zmazat
           </button>
         </div>
         <iframe [src]="addr?.safeUrl" width="100%" height="100%"></iframe>
@@ -41,9 +48,5 @@
     </div>
   </div>
 
-  <div class="footer">
-    IDEAL - Trade Service spol. s r.o.
-  </div>
+  <div class="footer">IDEAL - Trade Service spol. s r.o.</div>
 </div>
-
-

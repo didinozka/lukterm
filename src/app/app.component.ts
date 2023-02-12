@@ -1,15 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
-import {
-  ConfigDialogComponent,
-  ConfigDialogData,
-} from './components/config-dialog.component';
+import { ConfigDialogComponent, ConfigDialogData, } from './components/config-dialog.component';
 import { ClientData } from './model/ClientData';
 import { AddIpAddressDialogComponent } from './components/add-ip-address.component';
-import { PwdDialogComponent } from './components/pwd-dialog.component';
 import { KeyCode, ShortcutService } from './service/shortcut.service';
 import { ConfirmResetComponent } from './components/confirm-reset/confirm-reset.component';
+import { UserService } from './service/user.service';
+import { Observable } from 'rxjs';
+import { DOCUMENT } from '@angular/common';
 
 const DEFAULT_CLIENT_DATA = {
   subtitle: '',
@@ -31,15 +30,17 @@ const DEFAULT_PWD = 'Richard.134601861';
 export class AppComponent {
   public ipAddress: string = '';
   public addresses: { ip: string; safeUrl: SafeResourceUrl }[] = [];
-  isConfig = false;
-  password?: string;
-  height: number = 400;
-  clientData?: ClientData;
+  public isAuthorized$: Observable<boolean> = this.userService.authroized;
+  public password?: string;
+  public height: number = 400;
+  public clientData?: ClientData;
 
   constructor(
     private sanitizer: DomSanitizer,
     private dialog: MatDialog,
-    private shortcutService: ShortcutService
+    private shortcutService: ShortcutService,
+    private userService: UserService,
+    @Inject(DOCUMENT) public document: Document,
   ) {
     this.shortcutService.registerShortcut(
       [KeyCode.alt, KeyCode.shift, 'KeyR'],
@@ -54,8 +55,7 @@ export class AppComponent {
       }
     );
 
-    this.height = window.innerHeight - 112;
-
+    this.initLineHeight();
     this.initClientData();
     this.initPwd();
     this.restoreAddresses();
@@ -90,28 +90,20 @@ export class AppComponent {
   }
 
   public onConfig() {
-    if (this.isConfig) {
-      this.isConfig = false;
-      return;
-    }
-    this.openPwdDialog();
+    this.openConfig();
+  }
+
+  public onReload() {
+    const frames = this.document.querySelectorAll('iframe');
+    console.log({frames})
+    this.document.location.reload();
+    // frames.forEach((frame) => {
+    //   frame?.contentWindow?.location?.reload?.();
+    // })
   }
 
   public onAddAddress() {
     this.openIpAddressDialog();
-  }
-
-  public openPwdDialog() {
-    const dialog = this.dialog.open(PwdDialogComponent, {
-      data: {
-        pwd: '',
-      },
-    });
-    dialog.afterClosed().subscribe((value) => {
-      if (value === this.password) {
-        this.openConfig();
-      }
-    });
   }
 
   private addAddress(ipAddress: string) {
@@ -124,7 +116,7 @@ export class AppComponent {
 
   private openIpAddressDialog() {
     const dialog = this.dialog.open(AddIpAddressDialogComponent, {
-      data: { ipAddress: '' },
+      data: {ipAddress: ''},
     });
     dialog.afterClosed().subscribe((ipAddress) => {
       if (!ipAddress) return;
@@ -151,7 +143,7 @@ export class AppComponent {
 
     dialog.afterClosed().subscribe((value: ConfigDialogData) => {
       if (!value) return;
-      const { clientData, height, password } = value;
+      const {clientData, height, password} = value;
       this.height = height;
       if (password) {
         this.password = password;
@@ -167,6 +159,7 @@ export class AppComponent {
       };
       this.persistClientData();
       this.persistPwd();
+      this.persistHeight();
     });
   }
 
@@ -194,8 +187,12 @@ export class AppComponent {
     localStorage.setItem('data', JSON.stringify(this.clientData));
   }
 
+  private persistHeight() {
+    localStorage.setItem('line-height', JSON.stringify(this.height));
+  }
+
   private persistAddresses() {
-    const ipAddr = this.addresses.map(({ ip }) => ip);
+    const ipAddr = this.addresses.map(({ip}) => ip);
     localStorage.setItem('addresses', JSON.stringify(ipAddr));
   }
 
@@ -209,5 +206,14 @@ export class AppComponent {
     this.password = DEFAULT_PWD;
     this.persistClientData();
     this.persistPwd();
+  }
+
+  private initLineHeight() {
+    const localHeight = localStorage.getItem('line-height');
+    if (!localHeight) {
+      this.height = window.innerHeight - 112;
+    } else {
+      this.height = JSON.parse(localHeight);
+    }
   }
 }
