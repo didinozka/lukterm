@@ -19,7 +19,7 @@ import { MatDialog } from '@angular/material/dialog';
                       (click)="addAddress.emit()"
               >
                   <mat-icon>add</mat-icon>
-                  Pridat IP adresu
+                  Pridať IP adresu
               </button>
               <button *ngIf="isAuthorized$ | async" mat-stroked-button (click)="openConfig.emit()">
                   <mat-icon>settings</mat-icon>
@@ -27,15 +27,15 @@ import { MatDialog } from '@angular/material/dialog';
               </button>
               <button *ngIf="!(isAuthorized$ | async)" mat-stroked-button (click)="onLogin()">
                   <mat-icon>login</mat-icon>
-                  Prihlasenie
+                  Prihlásenie
               </button>
               <button *ngIf="isAuthorized$ | async" mat-stroked-button color="warn" (click)="onLogout()">
                   <mat-icon>logout</mat-icon>
-                  Odhlasit
+                  Odhlásit
               </button>
               <button mat-stroked-button (click)="reload.emit()">
                   <mat-icon>sync</mat-icon>
-                  Reload
+                  Načítať
               </button>
           </div>
       </div>

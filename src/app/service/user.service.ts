@@ -7,16 +7,11 @@ const DEFAULT_PWD = 'Richard.134601861';
   providedIn: 'root',
 })
 export class UserService {
-  private pwd: string;
+  private pwd?: string;
   private _authorized = new ReplaySubject<boolean>(1);
 
   constructor() {
-    const localPwd = localStorage.getItem('pwd-data');
-    if (localPwd) {
-      this.pwd = atob(localPwd);
-    } else {
-      this.pwd = DEFAULT_PWD;
-    }
+    this.initPwd();
   }
 
   public get authroized() {
@@ -28,7 +23,31 @@ export class UserService {
     return this.authroized;
   }
 
-  logout() {
+  public setPwd(pwd: string) {
+    this.pwd = pwd;
+    this.persistPwd();
+  }
+
+  public logout() {
     this._authorized.next(false);
+  }
+
+  public resetPwd() {
+    this.pwd = DEFAULT_PWD;
+    this.persistPwd();
+  }
+
+  private initPwd() {
+    const strPwd = localStorage.getItem('pwd');
+    if (strPwd) {
+      this.pwd = atob(strPwd);
+    } else {
+      this.pwd = DEFAULT_PWD;
+    }
+  }
+
+  private persistPwd() {
+    if (!this.pwd) return;
+    localStorage.setItem('pwd', btoa(this.pwd));
   }
 }

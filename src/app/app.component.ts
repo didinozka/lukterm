@@ -31,7 +31,6 @@ export class AppComponent {
   public ipAddress: string = '';
   public addresses: { ip: string; safeUrl: SafeResourceUrl }[] = [];
   public isAuthorized$: Observable<boolean> = this.userService.authroized;
-  public password?: string;
   public height: number = 400;
   public clientData?: ClientData;
 
@@ -57,7 +56,6 @@ export class AppComponent {
 
     this.initLineHeight();
     this.initClientData();
-    this.initPwd();
     this.restoreAddresses();
   }
 
@@ -146,7 +144,7 @@ export class AppComponent {
       const {clientData, height, password} = value;
       this.height = height;
       if (password) {
-        this.password = password;
+        this.userService.setPwd(password);
       }
       this.clientData = {
         subtitle: clientData.subtitle,
@@ -158,18 +156,8 @@ export class AppComponent {
         name: clientData.name,
       };
       this.persistClientData();
-      this.persistPwd();
       this.persistHeight();
     });
-  }
-
-  private initPwd() {
-    const strPwd = localStorage.getItem('pwd');
-    if (strPwd) {
-      this.password = atob(strPwd);
-    } else {
-      this.password = DEFAULT_PWD;
-    }
   }
 
   private restoreAddresses() {
@@ -196,16 +184,13 @@ export class AppComponent {
     localStorage.setItem('addresses', JSON.stringify(ipAddr));
   }
 
-  private persistPwd() {
-    if (!this.password) return;
-    localStorage.setItem('pwd', btoa(this.password));
-  }
-
   private resetData() {
     this.clientData = DEFAULT_CLIENT_DATA;
-    this.password = DEFAULT_PWD;
+    this.addresses = [];
+    this.persistAddresses();
     this.persistClientData();
-    this.persistPwd();
+    this.userService.resetPwd();
+    this.userService.logout();
   }
 
   private initLineHeight() {

@@ -31,7 +31,7 @@
         [ngStyle]="{ height: height + 'px' }"
       >
         <div class="frames__view__header">
-          <h4>{{ "Komresor: " + (i + 1) + ", IP adresa: " + addr?.ip }}</h4>
+          <h4>{{ "Kompresor: " + (i + 1) + ", IP adresa: " + addr?.ip }}</h4>
           <button
             *ngIf="isAuthorized$ | async"
             class="remove-action"
@@ -40,7 +40,7 @@
             (click)="onRemove(i)"
           >
             <mat-icon>close</mat-icon>
-            Zmazat
+            Zmazať
           </button>
         </div>
         <iframe [src]="addr?.safeUrl" width="100%" height="100%"></iframe>

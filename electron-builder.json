@@ -1,11 +1,11 @@
 {
-  "appId": "com.lukasturza.lukterm",
-  "productName": "lukterm",
+  "appId": "com.lukasturza.zephyr-its",
+  "productName": "zephyr-its",
   "directories": {
     "output": "release/",
     "buildResources": "buildResources"
   },
-  "buildVersion": "1.0.0",
+  "buildVersion": "0.3.0",
   "files": [
     ".env",
     "main.js",

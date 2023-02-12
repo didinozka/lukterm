@@ -1,6 +1,6 @@
 {
   "name": "lukas-term",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "main.js",
   "author": {
     "email": "drabik.d@gmail.com"
@@ -11,7 +11,7 @@
     "start:electon": "ENV=dev electron .",
     "build": "ng build",
     "release": "DISABLE_CORS=true npm run build &&  electron-builder --config electron-builder.json --publish never",
-    "release:all-platforms": "npm run release -- -w",
+    "release:all-platforms": "npm run release -- -wm",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
